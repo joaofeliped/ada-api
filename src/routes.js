@@ -13,11 +13,12 @@ routes.post('/users', UserController.store);
 routes.post('/sessions', SessionController.store);
 
 routes.use(authMiddleware);
+routes.get('/posts', PostController.index);
 
 routes.post('/courses', CourseController.store);
 routes.get('/courses', CourseController.index);
 
-routes.post('/posts/course/:courseId', PostController.store);
-routes.get('/posts', PostController.index);
+routes.post('/course/:courseId/posts', PostController.store);
+routes.get('/course/:courseId/posts', PostController.index);
 
 export default routes;
