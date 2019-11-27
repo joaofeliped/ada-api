@@ -11,9 +11,10 @@ class SubscriptionController {
       return res.status(400).json({ error: 'Course not found' });
     }
 
-    console.log(course.teacher.id);
+    console.log(course.teacher._id);
+    console.log(req.userId);
 
-    if (course && course.teacher.id === req.userId) {
+    if (course && course.teacher._id == req.userId) {
       return res
         .status(400)
         .json({ error: `You can't subscribe in your own course` });
