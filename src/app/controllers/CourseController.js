@@ -1,5 +1,6 @@
 import * as Yup from 'yup';
 import Course from '../schemas/Course';
+import User from '../schemas/User';
 
 class CourseController {
   async store(req, res) {
@@ -7,35 +8,45 @@ class CourseController {
       const schema = Yup.object().shape({
         name: Yup.string().required(),
         description: Yup.string().required(),
-        teacher: Yup.object().required(),
+        teacher: Yup.object(),
         powered_by: Yup.string(),
-        stars: Yup.number().required(),
+        stars: Yup.number(),
         students: Yup.object(),
         post: Yup.string(),
       });
 
       if (!(await schema.isValid(req.body))) {
-        return res
-          .status(400)
-          .json('O curso foi preenchido de forma errada, favor validar');
+        return res.status(400).json({
+          error: 'O curso foi preenchido de forma errada, favor validar',
+        });
       }
 
-      const {
-        name,
-        description,
+      const teacher = await User.findById(req.userId);
+
+      if (!teacher) {
+        return res.status(400).json('Teacher not found');
+      }
+
+      if (!teacher.teacher) {
+        return res.status(400).json({ error: 'User is not a teacher' });
+      }
+
+      const { name, description, powered_by, students, post } = req.body;
+
+      const checkCourseName = await Course.findOne({
         teacher,
-        powered_by,
-        stars,
-        students,
-        post,
-      } = req.body;
+        name,
+      });
+
+      if (checkCourseName) {
+        return res.status(400).json({ error: 'Course already exists' });
+      }
 
       const courseCreated = await Course.create({
         name,
         description,
         teacher,
         powered_by,
-        stars,
         students,
         post,
       });

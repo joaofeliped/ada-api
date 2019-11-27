@@ -6,6 +6,7 @@ import authMiddleware from './app/middlewares/auth';
 import UserController from './app/controllers/UserController';
 import SessionController from './app/controllers/SessionController';
 import PostController from './app/controllers/PostController';
+import SubscriptionController from './app/controllers/SubscriptionController';
 
 const routes = new Router();
 
@@ -19,5 +20,7 @@ routes.get('/courses', CourseController.index);
 
 routes.post('/posts/course/:courseId', PostController.store);
 routes.get('/posts', PostController.index);
+
+routes.post('/subscriptions/:courseId', SubscriptionController.store);
 
 export default routes;
