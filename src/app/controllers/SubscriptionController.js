@@ -21,11 +21,9 @@ class SubscriptionController {
 
     const { students } = course;
 
-    const checkUser = students.map(student => {
-      if (student._id == req.userId) return student;
-    });
+    const checkUser = students.find(student => student._id == req.userId);
 
-    if (checkUser.length > 0) {
+    if (checkUser) {
       return res
         .status(400)
         .json({ error: 'You are already subscribed in this course' });
