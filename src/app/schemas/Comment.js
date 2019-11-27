@@ -1,13 +1,9 @@
 import mongoose from 'mongoose';
 
-const PostSchema = new mongoose.Schema(
+const CommentSchema = new mongoose.Schema(
   {
     date: {
-      type: String,
-      required: true,
-    },
-    title: {
-      type: String,
+      type: Date,
       required: true,
     },
     message: {
@@ -22,13 +18,10 @@ const PostSchema = new mongoose.Schema(
       type: Object,
       required: true,
     },
-    comments: {
-      type: [Object],
-    },
   },
   {
     timestamps: true,
   }
 );
 
-export default mongoose.model('Post', PostSchema);
+export default mongoose.model('Comment', CommentSchema);

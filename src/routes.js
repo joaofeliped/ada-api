@@ -4,8 +4,9 @@ import CourseController from './app/controllers/CourseController';
 import authMiddleware from './app/middlewares/auth';
 
 import UserController from './app/controllers/UserController';
-import SessionController from './app/controllers/SessionController';
 import PostController from './app/controllers/PostController';
+import SessionController from './app/controllers/SessionController';
+import CommentController from './app/controllers/CommentController';
 
 const routes = new Router();
 
@@ -20,5 +21,7 @@ routes.get('/courses', CourseController.index);
 
 routes.post('/course/:courseId/posts', PostController.store);
 routes.get('/course/:courseId/posts', PostController.index);
+
+routes.post('/course/:courseId/posts/:postId', CommentController.store);
 
 export default routes;
