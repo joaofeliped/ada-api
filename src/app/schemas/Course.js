@@ -16,6 +16,9 @@ const CourseSchema = new mongoose.Schema(
     powered_by: {
       type: String,
     },
+    powered_by_avatar: {
+      type: String,
+    },
     stars: {
       type: Number,
       default: 0,
