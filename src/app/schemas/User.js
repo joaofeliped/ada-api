@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import bcrypt from 'bcryptjs';
 
 const UserSchema = new mongoose.Schema(
   {
@@ -29,9 +30,13 @@ const UserSchema = new mongoose.Schema(
 );
 
 UserSchema.pre('save', async next => {
-  console.log(await this.email);
+  console.log(this.email);
 
   next();
 });
+
+export function checkPassword(password, password_hash) {
+  return bcrypt.compare(password, password_hash);
+}
 
 export default mongoose.model('User', UserSchema);

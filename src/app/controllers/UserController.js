@@ -18,7 +18,7 @@ class UserController {
       return res.status(400).json({ message: 'Validation Fails' });
     }
 
-    const { email } = req.body;
+    const { email, password } = req.body;
 
     const checkUser = await UserSchema.findOne({
       email,
@@ -27,6 +27,8 @@ class UserController {
     if (checkUser) {
       return res.status(400).json({ message: 'Email already exists' });
     }
+
+    req.body.password_hash = await bcrypt.hash(password, 8);
 
     const user = await UserSchema.create(req.body);
 
