@@ -38,14 +38,18 @@ class CommentController {
 
       const { postId } = req.params;
 
-      const postSaved = await course.posts.find(post => post.id === postId);
+      const postSaved = await course.posts.find(post => post._id == postId);
 
-      const { comments } = postSaved;
-
+      const comments = postSaved.comments ? postSaved.comments : [];
+      console.log(comments);
       comments.push(commentCreated);
 
       await Course.findByIdAndUpdate(courseId, {
-        posts: { $set: comments },
+        posts: {
+          $set: {
+            comments,
+          },
+        },
       });
 
       return res.json(commentCreated);

@@ -1,6 +1,6 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
-const CourseSchema = new mongoose.Schema (
+const CourseSchema = new mongoose.Schema(
   {
     name: {
       type: String,
@@ -18,6 +18,7 @@ const CourseSchema = new mongoose.Schema (
     },
     stars: {
       type: Number,
+      default: 0,
     },
     students: {
       type: [Object],
