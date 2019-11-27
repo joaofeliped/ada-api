@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import CourseController from './app/controllers/CourseController';
 
-import authMiddleware from './app/middlewares/auth';
+// import authMiddleware from './app/middlewares/auth';
 
 import UserController from './app/controllers/UserController';
 import PostController from './app/controllers/PostController';
