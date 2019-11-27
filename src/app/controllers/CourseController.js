@@ -10,6 +10,7 @@ class CourseController {
         description: Yup.string().required(),
         teacher: Yup.object(),
         powered_by: Yup.string(),
+        powered_by_avatar: Yup.string(),
         stars: Yup.number(),
         students: Yup.object(),
         post: Yup.string(),
@@ -31,7 +32,14 @@ class CourseController {
         return res.status(400).json({ error: 'User is not a teacher' });
       }
 
-      const { name, description, powered_by, students, post } = req.body;
+      const {
+        name,
+        description,
+        powered_by,
+        powered_by_avatar,
+        students,
+        post,
+      } = req.body;
 
       const checkCourseName = await Course.findOne({
         teacher,
@@ -47,6 +55,7 @@ class CourseController {
         description,
         teacher,
         powered_by,
+        powered_by_avatar,
         students,
         post,
       });
