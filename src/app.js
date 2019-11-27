@@ -33,6 +33,8 @@ class App {
         return res.status(500).json(errors);
       }
 
+      console.log(err);
+
       return res.status(500).json({ error: 'Internal server error' });
     });
   }
